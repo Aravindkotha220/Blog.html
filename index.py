@@ -125,65 +125,62 @@ print(count_char_occurs('a', 'banana'))
 print(count_char_occurs('i', 'banana'))  
 
 # 17.Create a function that takes a string and returns the number (count) of vowels contained within it.
-def count_Vowels(string):
+def count_vowels(string):
+    vowels = {'a', 'e', 'i', 'o', 'u'}
     count = 0
-    for i in string:
-        if i in ['a','e','i','o','u','A','E','I','O','U']:
+    for char in string:  
+        if char.lower() in vowels:
             count += 1       
     return count
+
 text = "Hello, how many vowels are in this sentence?"
-print(count_Vowels(text))
+print(count_vowels(text)) 
 
 #18. Given a string, create a function to reverse the case. All lower-cased letters should be upper-cased, and vice versa.
+
 str = 'Happy Birthday'
+def reverse_Case(str):
+    return ''.join(i.lower() if i.isupper() else i.upper() for i in str)
+    
+print(reverse_Case(str))
 
-def reverseCase(str):
-    newstr = ''
-    for i in str:
-        if i==i.upper():
-            newstr += (i.lower())
-        else:
-            newstr += (i.upper())
-    return newstr
-
-print(reverseCase(str))
-     
 
 #  19. Take one integer n, loop till n and pass each value to a function, create a function that takes one integer parameter, and multiply with 2 in every integer.
-n = 5
-def multFun(n):
-    for i in range(1,n+1):
-       print(i*2)
-multFun(n)		
+def multFun(n, multiplier=2):
+    print([i * multiplier for i in range(1, n + 1)])
+
+multFun(5)
+multFun(5,3)
+multFun(5,4)		
 # 		
 
 #  20. Create Function that will take one parameter and return type of the data.
 
-def return_Datatype(data):
-    return type(data)
-print(return_Datatype(10.5))
-print(return_Datatype(10))
-print(return_Datatype("data"))	
+def return_datatype(data):
+    return type(data).__name__ 
+print(return_datatype(10.5))   
+print(return_datatype(10))    
+print(return_datatype("data")) 
+print(return_datatype([1, 2])) 
+print(return_datatype({1, 2})) 
 
 #  21. Program to find greatest of three numbers(using ternary operator).
-def greatest_in_threeNumbers(num1,num2,num3):
-    return num1 if num1 > num2 and num1 > num2 else num2 if num2 > num3 else num3
+def greatest_of_three(a, b, c):
+    return a if (a > b and a > c) else (b if b > c else c)
 
-print(greatest_in_threeNumbers(4,8,2))
+print(greatest_of_three(10, 20, 30)) 
+print(greatest_of_three(100, 50, 150))
 		
 #  22 . C Program to find factorial of number.
 def factorial_num(n):
-    fact = 1
-    for i in range(1,n+1):
-        fact = fact*i
-    return fact
+    return 1 if n == 0 else n * factorial_num(n - 1)
 
 print(factorial_num(5)) 
 		
 #  23. C Program to arrange numbers in ascending order Sort the Array using loop only(you can not use predefined function).
 
 
-#  24. Print Patter using loop.
+#  24. Print Pattern using loop.
 
 def pattern(n):
     for i in range(1,n+1):
@@ -204,11 +201,32 @@ print(power_Of_Num(5,3))
 
 #  26. Program to Check Whether a Number is Prime or Not
 
-# 		
+def is_prime(n):
+    if n < 2:
+        return False  
+    for i in range(2, int(n**0.5) + 1): 
+        if n % i == 0:
+            return False 
+    return True 
+num = int(input("Enter a number: "))
+
+if is_prime(num):
+    print(f"{num} is a Prime number.")
+else:
+    print(f"{num} is NOT a Prime number.")
 
 #  27. Program to find LCM of two numbers using while loop
 
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
 
+def find_lcm(num1, num2):
+    lcm = max(num1, num2)
+    while True:
+        if lcm % num1 == 0 and lcm % num2 == 0:
+            return lcm  
+        lcm += 1 
+print(f"LCM of {num1} and {num2} is {find_lcm(num1, num2)}")
 
 #  28. Program to Display Characters from A to Z Using Loop with count.
 # count = 0
@@ -235,18 +253,17 @@ for i in range(1, max + 1):
 
 # 30. Program to count vowels and consonants in a given String.
 
-char = "i am Aravind"
-char = char.replace(' ','')
+char = "I am Aravind"
 print(char)
 vowelCount = 0
 consonants = 0
 for ch in char:
-    if ch in ['a','e','i','o','u']:
+    if ch.lower() in ['a', 'e', 'i', 'o', 'u']:
         vowelCount += 1
-    elif char.isalpha() :
-        consonants +=1
-      
-print(vowelCount,consonants)
+    elif ch.isalpha():
+        consonants += 1
+
+print("Vowels:", vowelCount, "Consonants:", consonants)
 
 # 31. program to insert  the elements of an array for specific index.
 
@@ -256,25 +273,22 @@ print(list1)
 
 
 # 32. Reverse a number using while Loop
-num = 123
+num = 54321
 def reverse(num):
     temp = num
-    sum = 0
+    rev = 0 
     while temp != 0:
-        rem = temp % 10
-        sum = sum * 10 + rem
+        rem = temp % 10  
+        rev = rev * 10 + rem 
         temp = temp // 10
-    return sum    
-    
+    return rev
+
 print(reverse(num))
 
 # 33. Count occurrence of number:
 
-arr = [1,6,3,1,1,9,3,7,8,9,10,5,9,7,2,]
+arr = [1,6,3,1,1,9,3,7,8,9,10,5,9,7,2]
 num = 7
-count = 0
-for i in arr:
-    if num == i:
-        count += 1
-print(count)  
+print(arr.count(num))  
+ 
 
